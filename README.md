@@ -1,3 +1,19 @@
+## Satella
+
+## 技術スタック
+
+###
+
+- React
+- Next.js
+
+### UI
+
+- Material UI
+- Tailwind CSS
+
+# Auto Generated
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
