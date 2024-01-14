@@ -1,4 +1,4 @@
-## Satella
+# Satella
 
 ## 技術スタック
 
@@ -11,6 +11,16 @@
 
 - Material UI
 - Tailwind CSS
+
+
+## ディレクトリ構成
+こちらの記事を参考に構成
+https://zenn.dev/yodaka/articles/eca2d4bf552aeb
+
+### /components
+アプリケーション全体で使用するコンポーネント
+
+
 
 # Auto Generated
 
