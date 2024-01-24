@@ -1,8 +1,9 @@
 "use client";
 import { css } from "@emotion/react";
 import { Session } from "@supabase/supabase-js";
+import Head from "next/head";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import Link from "next/link";
 
 // TODO: CSSのデザインを修正
 
@@ -27,10 +28,13 @@ const NavigationHiddenSetting = css({
 
 interface NavigationProps {
   session: Session | null;
-  children: ReactNode;
+  navigationLinks: NavigationLink[];
 }
 
-const TopNavigation: React.FC<NavigationProps> = ({ children, session }) => {
+const TopNavigation: React.FC<NavigationProps> = ({
+  session,
+  navigationLinks,
+}) => {
   const router = useRouter();
 
   // TODO: セッションがない場合にサインイン画面へ遷移させるようにする
@@ -39,11 +43,21 @@ const TopNavigation: React.FC<NavigationProps> = ({ children, session }) => {
   }
 
   return (
-    <head>
+    <Head>
       <div css={NavigationCss}>
-        <nav css={NavigationHiddenSetting}>{children}</nav>
+        <nav css={NavigationHiddenSetting}>
+          {navigationLinks.map((obj) => {
+            return (
+              <Link
+                key={obj.key}
+                href={obj.link}
+                title={obj.linkTitle}
+              />
+            );
+          })}
+        </nav>
       </div>
-    </head>
+    </Head>
   );
 };
 
