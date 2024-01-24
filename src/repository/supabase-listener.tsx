@@ -3,38 +3,40 @@ import NavigationLink from "../../components/elements/navigation/navigation-link
 import { cookies } from "next/headers";
 import TopNavigation from "../../components/elements/navigation/navigation";
 
-interface SupabaseListenerProps {}
+const LinkHome: NavigationLink = {
+  key: "Home",
+  linkTitle: "HOME",
+  link: "/",
+};
 
-const LinkHome = (
-  <NavigationLink
-    linkTitle={"HOME"}
-    link={"/"}
-  />
-);
-const LinkSearch = (
-  <NavigationLink
-    linkTitle={"Search"}
-    link={"/"}
-  />
-);
-const LinkBookmark = (
-  <NavigationLink
-    linkTitle={"Bookmark"}
-    link={""}
-  />
-);
-const LinkReservation = (
-  <NavigationLink
-    linkTitle={"Reservation"}
-    link={"/"}
-  />
-);
+const LinkSearch: NavigationLink = {
+  key: "Search",
+  linkTitle: "Search",
+  link: "/",
+};
 
-const NavigationLinksBeforeLogin = [LinkHome];
-const NavigationLinks = [LinkHome, LinkSearch, LinkBookmark, LinkReservation];
+const LinkBookmark: NavigationLink = {
+  key: "Bookmark",
+  linkTitle: "Bookmark",
+  link: "/",
+};
+
+const LinkReservation: NavigationLink = {
+  key: "Reservation",
+  linkTitle: "Reservation",
+  link: "/",
+};
+
+const NavigationLinksBeforeLogin: NavigationLink[] = [LinkHome];
+const NavigationLinks: NavigationLink[] = [
+  LinkHome,
+  LinkSearch,
+  LinkBookmark,
+  LinkReservation,
+];
 
 // SupabaseのSessionを渡すためのラッパー
-const SupabaseListener: React.FC<SupabaseListenerProps> = async ({}) => {
+const SupabaseListener: React.FC = async ({}) => {
   const supabase = createServerComponentClient({ cookies });
 
   const {
@@ -44,11 +46,7 @@ const SupabaseListener: React.FC<SupabaseListenerProps> = async ({}) => {
   return (
     <TopNavigation
       session={session}
-      children={
-        session
-          ? NavigationLinks.map((obj) => obj)
-          : NavigationLinksBeforeLogin.map((obj) => obj)
-      }
+      navigationLinks={session ? NavigationLinks : NavigationLinksBeforeLogin}
     />
   );
 };
