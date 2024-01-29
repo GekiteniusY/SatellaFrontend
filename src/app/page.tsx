@@ -1,11 +1,11 @@
-"use client";
-
 import Head from "next/head";
 
 export default function Home() {
   return (
     <>
-      <div>hello world</div>
+      <h1 className='text-3xl font-bold underline'>
+        Hi here is satella root directory
+      </h1>
     </>
   );
 }
