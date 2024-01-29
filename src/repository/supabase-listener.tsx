@@ -8,6 +8,12 @@ const LinkHome: NavigationLink = {
   link: "/",
 };
 
+const SignUp: NavigationLink = {
+  key: "SignUp",
+  linkTitle: "SignUp",
+  link: "/SignUp",
+};
+
 const LinkSearch: NavigationLink = {
   key: "Search",
   linkTitle: "Search",
@@ -26,7 +32,7 @@ const LinkReservation: NavigationLink = {
   link: "/",
 };
 
-const NavigationLinksBeforeLogin: NavigationLink[] = [LinkHome];
+const NavigationLinksBeforeLogin: NavigationLink[] = [LinkHome, SignUp];
 const NavigationLinks: NavigationLink[] = [
   LinkHome,
   LinkSearch,
@@ -41,6 +47,8 @@ const SupabaseListener: React.FC = async ({}) => {
   const {
     data: { session },
   } = await supabase.auth.getSession();
+
+  console.log("supabase listener");
 
   return (
     <TopNavigation

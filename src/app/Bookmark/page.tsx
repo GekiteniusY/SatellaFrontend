@@ -1,10 +1,8 @@
-"use client";
-
 export default function Bookmark() {
-  console.log("test======");
+  console.log("bookmark");
   return (
     <>
-      <div>hello worldddddd</div>
+      <div>Here is Bookmark page</div>
     </>
   );
 }
