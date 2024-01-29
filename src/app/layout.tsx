@@ -1,4 +1,3 @@
-"use client";
 import type { Metadata } from "next";
 import SupabaseListener from "../repository/supabase-listener";
 
@@ -14,6 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ja'>
+      <SupabaseListener />
       <body>
         <main>{children}</main>
       </body>

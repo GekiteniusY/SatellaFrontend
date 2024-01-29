@@ -1,5 +1,4 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import NavigationLink from "../../components/elements/navigation/navigation-link";
 import { cookies } from "next/headers";
 import TopNavigation from "../../components/elements/navigation/navigation";
 
