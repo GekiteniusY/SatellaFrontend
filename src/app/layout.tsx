@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SupabaseListener from "../repository/supabase-listener";
+import NavigationSupabaseListener from "../repository/navigation-supabase-listener";
 
 export const metadata: Metadata = {
   title: "Satella",
@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang='ja'>
       <body>
         <div>
-          <SupabaseListener />
+          <NavigationSupabaseListener />
         </div>
         <main>{children}</main>
       </body>

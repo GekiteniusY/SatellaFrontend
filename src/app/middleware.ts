@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 // import type { Database } from "@/lib/database.types";
 
+// TODO: middleware実装時にリダイレクト処理をどこで行うか検討すること（二重になりそう？）
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
