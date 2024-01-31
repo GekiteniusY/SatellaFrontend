@@ -41,7 +41,7 @@ const NavigationLinks: NavigationLink[] = [
 ];
 
 // SupabaseのSessionを渡すためのラッパー
-const SupabaseListener: React.FC = async ({}) => {
+const NavigationSupabaseListener: React.FC = async ({}) => {
   const supabase = createServerComponentClient({ cookies });
 
   const {
@@ -49,13 +49,9 @@ const SupabaseListener: React.FC = async ({}) => {
   } = await supabase.auth.getSession();
 
   console.log("supabase listener");
+  console.log("session: ", session);
 
-  return (
-    <TopNavigation
-      session={session}
-      navigationLinks={session ? NavigationLinks : NavigationLinksBeforeLogin}
-    />
-  );
+  return <TopNavigation session={session} />;
 };
 
-export default SupabaseListener;
+export default NavigationSupabaseListener;

@@ -1,9 +1,7 @@
 # Satella
-
 ## 技術スタック
 
 ###
-
 - React
 - Next.js
 
@@ -18,7 +16,24 @@
 https://zenn.dev/yodaka/articles/eca2d4bf552aeb
 
 ### /components
-アプリケーション全体で使用するコンポーネント
+アプリケーションで使用するコンポーネントを格納する親ディレクトリ
+
+#### /components/elements
+ナビゲーションやモーダルなどのコンポーネントを保持するディレクトリ
+
+- /components/elements/{component name}/layout
+  コンポーネントの大枠を規定する
+  状態制御のロジックやドメインの情報を含めない
+  SomethingLayoutのように命名規則としてLayoutを付与する
+  準フレームワーク的な位置づけ
+  /components/elements/{component name}のみ依存可能（呼び出し可能）
+
+- /components/elements/{component name}
+  {component name}/layoutを利用しながら状態制御のロジックやドメインの情報を加えていく
+  
+
+#### /components/page-layouts
+ページ単位のレイアウトをコンポーネントとして保持する場合のディレクトリ
 
 
 
