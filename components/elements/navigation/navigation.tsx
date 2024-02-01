@@ -7,20 +7,14 @@ import ModalSignUp from "../modal/modal-signup";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { ClassNames } from "@emotion/react";
 
 // TODO: CSSのデザインを修正
+// TODO: Userのプロフィールページへリンクするアイコン部分の作成
 
 const LinkHome: NavigationLink = {
   key: "Home",
   linkTitle: "HOME",
   link: "/",
-};
-
-const SignUp: NavigationLink = {
-  key: "SignUp",
-  linkTitle: "SignUp",
-  link: "/SignUp",
 };
 
 const LinkSearch: NavigationLink = {
@@ -41,7 +35,7 @@ const LinkReservation: NavigationLink = {
   link: "/",
 };
 
-const NavigationLinksBeforeLogin: NavigationLink[] = [LinkHome, SignUp];
+const NavigationLinksBeforeLogin: NavigationLink[] = [LinkHome];
 const NavigationLinks: NavigationLink[] = [
   LinkHome,
   LinkSearch,
@@ -53,85 +47,6 @@ interface NavigationProps {
   session: Session | null;
 }
 
-const pcMenue = (
-  session: Session | null,
-  navigationLinks: NavigationLink[]
-) => {
-  return (
-    <>
-      {navigationLinks.map((obj) => {
-        console.log("map");
-        console.log(obj);
-        return (
-          <Link
-            key={obj.key}
-            href={obj.link}
-            title={obj.linkTitle}
-            className='text-gray-600 hover:text-blue-600'
-          >
-            {obj.linkTitle}
-          </Link>
-        );
-      })}
-      {session ? (
-        // サインイン中は特段の表示なし
-        <></>
-      ) : (
-        // サインイン前にはSignInとSignUpのモーダルへのリンクを表示
-        <>
-          <ModalSignIn></ModalSignIn>
-          <ModalSignUp></ModalSignUp>
-        </>
-      )}
-    </>
-  );
-};
-
-// TODO: スマホ向けのレイアウトを調整する
-const spMenue = (
-  session: Session | null,
-  navigationLinks: NavigationLink[]
-) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  return (
-    <>
-      <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className='md:hidden'
-      >
-        this is humburger menu
-      </button>
-      {isMenuOpen ? "Close" : "Open"}
-      {navigationLinks.map((obj) => {
-        console.log("map");
-        console.log(obj);
-        return (
-          <Link
-            key={obj.key}
-            href={obj.link}
-            title={obj.linkTitle}
-            className='text-gray-600 hover:text-blue-600'
-          >
-            {obj.linkTitle}
-          </Link>
-        );
-      })}
-      {session ? (
-        // サインイン中は特段の表示なし
-        <></>
-      ) : (
-        // サインイン前にはSignInとSignUpのモーダルへのリンクを表示
-        // TODO: スマホ向けのモーダルのレイアウトを調整する
-        <>
-          <ModalSignIn></ModalSignIn>
-          <ModalSignUp></ModalSignUp>
-        </>
-      )}
-    </>
-  );
-};
-
 // 全てのページの上部に表示されるナビゲーション
 // sessionが無い場合：Homeへのリンク、SignUpおよびSignInのモーダル表示切替のテキスト
 const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
@@ -139,13 +54,32 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
 
   // TODO: middleware実装時にリダイレクト処理をどこで行うか検討すること（二重になりそう？）
   // sessionが無い場合のリダイレクト処理
-  const pathname = usePathname();
-  const router = useRouter();
+  // const pathname = usePathname();
+  // const router = useRouter();
 
-  if (session === null && !pathname?.includes("/Home")) {
-    router.push("/");
-  }
+  // if (session === null && !pathname?.includes("/Home")) {
+  //   router.push("/");
+  // }
 
+  // SignInモーダルの開閉制御用
+  const [isModalSignInOpen, setIsModalSignInOpen] = useState(false);
+  const openModalSignIn = () => {
+    setIsModalSignInOpen(true);
+  };
+  const closeModalSingIn = () => {
+    setIsModalSignInOpen(false);
+  };
+
+  // SignUpモーダルの開閉制御用
+  const [isModalSignUpOpen, setIsModalSignUp] = useState(false);
+  const openModalSignUp = () => {
+    setIsModalSignUp(true);
+  };
+  const closeModalSignUp = () => {
+    setIsModalSignUp(false);
+  };
+
+  // セッション状態によるリンクの出し分け
   const navigationLinks: NavigationLink[] = session
     ? NavigationLinks
     : NavigationLinksBeforeLogin;
@@ -156,9 +90,39 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
       <TopNavigationLayout>
         <>
           {/* スマホ向け、PC向けの判定はコンポーネント内のTailwindCSSで実装中 */}
-          {/* TODO: TailwindCSS以外での実装やベタープラクティスがあるかどうか調べる */}
-          {spMenue(session, navigationLinks)}
-          {pcMenue(session, navigationLinks)}
+          {/* ∵モーダルの開閉状態の制御ロジックが分散するのを防ぐため */}
+          <nav className='md:flex hidden space-x-10'>
+            {navigationLinks.map((obj) => {
+              console.log("map");
+              console.log(obj);
+              return (
+                <Link
+                  key={obj.key}
+                  href={obj.link}
+                  title={obj.linkTitle}
+                  className='text-gray-600 hover:text-blue-600'
+                >
+                  {obj.linkTitle}
+                </Link>
+              );
+            })}
+            {session ? (
+              // サインイン中は特段の表示なし
+              <></>
+            ) : (
+              // サインイン前にはSignInとSignUpのモーダルへのリンクを表示
+              <>
+                <button onClick={openModalSignIn}>SignIn</button>
+                <button onClick={openModalSignUp}>SignUp</button>
+                {isModalSignInOpen ? (
+                  <ModalSignIn closeModalSignIn={closeModalSingIn} />
+                ) : null}
+                {isModalSignUpOpen ? (
+                  <ModalSignUp closeModalSignUp={closeModalSignUp} />
+                ) : null}
+              </>
+            )}
+          </nav>
         </>
       </TopNavigationLayout>
     </>
