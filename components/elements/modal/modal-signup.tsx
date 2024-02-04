@@ -1,5 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import ModalCardLayout from "./layout/modal-card-layout";
+import InputEmail from "../text-field/input_email";
+import InputPassword from "../text-field/input_password";
 
 const ModalSignUp = (props: {
   closeModalSignUp: Dispatch<SetStateAction<boolean>>;
@@ -38,6 +40,8 @@ const ModalSignUp = (props: {
       <div className='p-4 md:p-5'>
         {/* TODO: Sign Upフォームの作成 */}
         <p>Todo: Create Sing Up form</p>
+        <InputEmail required={true} />
+        <InputPassword required={true} />
       </div>
     </ModalCardLayout>
   );
