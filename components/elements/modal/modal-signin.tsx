@@ -1,5 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import ModalCardLayout from "./layout/modal-card-layout";
+import InputEmail from "../text-field/input_email";
+import InputPassword from "../text-field/input_password";
+import PaginationDot from "../pagination-dot/pagination-dot";
 
 // TODO: propsの受け取り方、記法について調べる
 // TODO: Dispatchについて調べる
@@ -8,6 +11,21 @@ const ModalSignIn = (props: {
 }) => {
   // TODO: 記法について調べる
   const { closeModalSignIn: closeModalSignIn } = props;
+  const [modalPageNum, setModalPage] = useState(1);
+  const [modalPageContent, setModalPageContent] = useState(<></>);
+  // switch (modalPageNum) {
+  //   case 1:
+  //     setModalPageContent(
+  //       <>
+  //         <InputEmail required={true} />
+  //         <InputPassword required={true} />
+  //       </>
+  //     );
+  //     break;
+
+  //   default:
+  //     break;
+  // }
 
   return (
     <ModalCardLayout>
@@ -40,7 +58,24 @@ const ModalSignIn = (props: {
       {/* 入力フォーム部分 */}
       <div className='p-4 md:p-5'>
         {/* TODO: Sign Inフォームの作成 */}
+        {/* TODO: ページネーションでフォームの入力を表現 */}
+
         <p>Todo: Create Sing In form</p>
+        <div className='mt-4'>
+          <InputEmail required={true} />
+        </div>
+        <div className='mt-4'>
+          <InputPassword required={true} />
+        </div>
+        <div className='flex justify-center mt-10'>
+          <button onClick={() => {}}>Next Page</button>
+        </div>
+        <div className='flex items-center justify-center mt-5'>
+          <PaginationDot isActiveColor={true} />
+          <PaginationDot isActiveColor={false} />
+          <PaginationDot isActiveColor={false} />
+          <PaginationDot isActiveColor={false} />
+        </div>
       </div>
     </ModalCardLayout>
   );
