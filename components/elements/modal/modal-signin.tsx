@@ -67,14 +67,8 @@ const ModalSignIn = (props: {
         <div className='mt-4'>
           <InputPassword required={true} />
         </div>
-        <div className='flex justify-center mt-10'>
-          <button onClick={() => {}}>Next Page</button>
-        </div>
-        <div className='flex items-center justify-center mt-5'>
-          <PaginationDot isActiveColor={true} />
-          <PaginationDot isActiveColor={false} />
-          <PaginationDot isActiveColor={false} />
-          <PaginationDot isActiveColor={false} />
+        <div className='flex justify-center mt-10 bg-indigo-400 rounded-lg'>
+          <button onClick={() => {}}>Sign In</button>
         </div>
       </div>
     </ModalCardLayout>
