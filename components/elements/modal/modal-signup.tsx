@@ -1,15 +1,33 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import ModalCardLayout from "./layout/modal-card-layout";
 import InputEmail from "../text-field/input_email";
 import InputPassword from "../text-field/input_password";
 import PaginationDot from "../pagination-dot/pagination-dot";
+import NormalFillButton from "../button/normal-fill-button";
 
 const ModalSignUp = (props: {
   closeModalSignUp: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { closeModalSignUp: closeModalSignUp } = props;
+  const inputPage = "InputPage";
+  const sendMailPage = "SendMailPage";
+  const [page, setPage] = useState(inputPage);
 
-  const SignUp = () => {};
+  const SignUp = () => {
+    // TODO: Sign Up処理を実装
+    setPage("SendMailPage");
+  };
+
+  // TODO: ページ遷移アニメーションの実装
+  let InputFormComponent;
+  switch (page) {
+    case inputPage:
+      InputFormComponent = InputPage(SignUp);
+      break;
+    case sendMailPage:
+      InputFormComponent = SendMailPage();
+      break;
+  }
 
   return (
     <ModalCardLayout>
@@ -40,27 +58,44 @@ const ModalSignUp = (props: {
         </button>
       </div>
       {/* 入力フォーム部分 */}
-      <div className='p-4 md:p-5'>
-        {/* TODO: Sign Upフォームの作成 */}
-        <p>Todo: Create Sing Up form</p>
-        <div className='mt-4'>
-          <InputEmail required={true} />
-        </div>
-        <div className='mt-4'>
-          <InputPassword required={true} />
-        </div>
-        <div className='flex justify-center mt-10 bg-indigo-400 rounded-lg'>
-          <button onClick={SignUp}>Sign Up</button>
-        </div>
-        <div className='flex items-center justify-center mt-5'>
-          <PaginationDot isActiveColor={true} />
-          <PaginationDot isActiveColor={false} />
-          <PaginationDot isActiveColor={false} />
-          <PaginationDot isActiveColor={false} />
-        </div>
-      </div>
+      {InputFormComponent}
     </ModalCardLayout>
   );
+};
+
+const InputPage = (
+  signUpFunction: React.MouseEventHandler<HTMLButtonElement>
+) => {
+  return (
+    <div className='p-4 md:p-5'>
+      {/* TODO: Sign Upフォームの作成 */}
+      <p>Todo: Create Sing Up form</p>
+      <div className='mt-4'>
+        <InputEmail required={true} />
+      </div>
+      <div className='mt-4'>
+        <InputPassword required={true} />
+      </div>
+      <div className='flex justify-center mt-6 py-2 px-1'>
+        <button
+          onClick={signUpFunction}
+          className='w-full'
+        >
+          <NormalFillButton>Sign Up</NormalFillButton>
+        </button>
+      </div>
+      <div className='flex items-center justify-center mt-5'>
+        <PaginationDot isActiveColor={true} />
+        <PaginationDot isActiveColor={false} />
+        <PaginationDot isActiveColor={false} />
+        <PaginationDot isActiveColor={false} />
+      </div>
+    </div>
+  );
+};
+
+const SendMailPage = () => {
+  return <>確認用のメールが送信されました</>;
 };
 
 export default ModalSignUp;

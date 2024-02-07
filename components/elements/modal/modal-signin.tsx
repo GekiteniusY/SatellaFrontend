@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import ModalCardLayout from "./layout/modal-card-layout";
 import InputEmail from "../text-field/input_email";
 import InputPassword from "../text-field/input_password";
-import PaginationDot from "../pagination-dot/pagination-dot";
+import NormalFillButton from "../button/normal-fill-button";
 
 // TODO: propsの受け取り方、記法について調べる
 // TODO: Dispatchについて調べる
@@ -13,6 +13,9 @@ const ModalSignIn = (props: {
   const { closeModalSignIn: closeModalSignIn } = props;
   const [modalPageNum, setModalPage] = useState(1);
   const [modalPageContent, setModalPageContent] = useState(<></>);
+
+  // TODO: Sign In処理の実装
+
   // switch (modalPageNum) {
   //   case 1:
   //     setModalPageContent(
@@ -67,8 +70,13 @@ const ModalSignIn = (props: {
         <div className='mt-4'>
           <InputPassword required={true} />
         </div>
-        <div className='flex justify-center mt-10 bg-indigo-400 rounded-lg'>
-          <button onClick={() => {}}>Sign In</button>
+        <div className='flex justify-center mt-6 py-2 px-10'>
+          <button
+            onClick={() => {}}
+            className='w-full'
+          >
+            <NormalFillButton>Sign In</NormalFillButton>
+          </button>
         </div>
       </div>
     </ModalCardLayout>
