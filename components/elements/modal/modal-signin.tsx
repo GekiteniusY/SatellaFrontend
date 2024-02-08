@@ -3,32 +3,13 @@ import ModalCardLayout from "./layout/modal-card-layout";
 import InputEmail from "../text-field/input_email";
 import InputPassword from "../text-field/input_password";
 import NormalFillButton from "../button/normal-fill-button";
+import { login, logout } from "@/app/auth/actions";
 
 // TODO: propsの受け取り方、記法について調べる
 // TODO: Dispatchについて調べる
-const ModalSignIn = (props: {
-  closeModalSignIn: Dispatch<SetStateAction<boolean>>;
-}) => {
+const ModalSignIn = (props: { closeModalSignIn: Function }) => {
   // TODO: 記法について調べる
   const { closeModalSignIn: closeModalSignIn } = props;
-  const [modalPageNum, setModalPage] = useState(1);
-  const [modalPageContent, setModalPageContent] = useState(<></>);
-
-  // TODO: Sign In処理の実装
-
-  // switch (modalPageNum) {
-  //   case 1:
-  //     setModalPageContent(
-  //       <>
-  //         <InputEmail required={true} />
-  //         <InputPassword required={true} />
-  //       </>
-  //     );
-  //     break;
-
-  //   default:
-  //     break;
-  // }
 
   return (
     <ModalCardLayout>
@@ -60,24 +41,25 @@ const ModalSignIn = (props: {
       </div>
       {/* 入力フォーム部分 */}
       <div className='p-4 md:p-5'>
-        {/* TODO: Sign Inフォームの作成 */}
-        {/* TODO: ページネーションでフォームの入力を表現 */}
-
-        <p>Todo: Create Sing In form</p>
-        <div className='mt-4'>
-          <InputEmail required={true} />
-        </div>
-        <div className='mt-4'>
-          <InputPassword required={true} />
-        </div>
-        <div className='flex justify-center mt-6 py-2 px-10'>
-          <button
-            onClick={() => {}}
-            className='w-full'
-          >
-            <NormalFillButton>Sign In</NormalFillButton>
-          </button>
-        </div>
+        <form>
+          <div className='mt-4'>
+            <InputEmail required={true} />
+          </div>
+          <div className='mt-4'>
+            <InputPassword required={true} />
+          </div>
+          <div className='flex justify-center mt-6 py-2 px-10'>
+            <button
+              formAction={(formData) => {
+                closeModalSignIn();
+                login(formData);
+              }}
+              className='w-full'
+            >
+              <NormalFillButton>Sign In</NormalFillButton>
+            </button>
+          </div>
+        </form>
       </div>
     </ModalCardLayout>
   );
