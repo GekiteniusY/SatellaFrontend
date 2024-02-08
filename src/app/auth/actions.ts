@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "../../../utils/supabase/action";
 
 export async function login(formData: FormData) {
+  console.log("login: ", "invoked");
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -29,6 +30,7 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
+  console.log("signup: ", "invoked");
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -40,6 +42,20 @@ export async function signup(formData: FormData) {
   };
 
   const { error } = await supabase.auth.signUp(data);
+
+  if (error) {
+    redirect("/error");
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/");
+}
+
+export async function logout() {
+  console.log("logout: ", "invoked");
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { error } = await supabase.auth.signOut();
 
   if (error) {
     redirect("/error");
