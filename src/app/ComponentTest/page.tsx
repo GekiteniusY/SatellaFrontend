@@ -1,29 +1,21 @@
-"use client";
-import PaginationDot from "../../../components/elements/pagination-dot/pagination-dot";
+import { useRouter } from "next/router";
+import PaginationTest from "../../../components/test/pagination-test";
+import { useEffect, useState } from "react";
+
+const transitionStyles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+};
 
 export default function ComponentTest() {
   console.log("ComponentTest");
+
   return (
     <>
       <div>Here is ComponentTest page</div>
-      <div className='flex items-center justify-center mt-5'>
-        <PaginationDot
-          isActiveColor={true}
-          onClickFunction={() => {}}
-        />
-        <PaginationDot
-          isActiveColor={false}
-          onClickFunction={() => {}}
-        />
-        <PaginationDot
-          isActiveColor={false}
-          onClickFunction={() => {}}
-        />
-        <PaginationDot
-          isActiveColor={false}
-          onClickFunction={() => {}}
-        />
-      </div>
+      <PaginationTest />
     </>
   );
 }

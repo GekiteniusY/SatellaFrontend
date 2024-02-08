@@ -14,25 +14,25 @@ import { useState } from "react";
 const LinkHome: NavigationLink = {
   key: "Home",
   linkTitle: "HOME",
-  link: "/",
+  link: "/Home",
 };
 
 const LinkSearch: NavigationLink = {
   key: "Search",
   linkTitle: "Search",
-  link: "/",
+  link: "/Search",
 };
 
 const LinkBookmark: NavigationLink = {
   key: "Bookmark",
   linkTitle: "Bookmark",
-  link: "/",
+  link: "/Bookmark",
 };
 
 const LinkReservation: NavigationLink = {
   key: "Reservation",
   linkTitle: "Reservation",
-  link: "/",
+  link: "/Reservation",
 };
 
 const NavigationLinksBeforeLogin: NavigationLink[] = [LinkHome];
@@ -93,8 +93,6 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
           {/* ∵モーダルの開閉状態の制御ロジックが分散するのを防ぐため */}
           <nav className='md:flex hidden space-x-10'>
             {navigationLinks.map((obj) => {
-              console.log("map");
-              console.log(obj);
               return (
                 <Link
                   key={obj.key}
