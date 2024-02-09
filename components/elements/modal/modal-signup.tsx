@@ -4,17 +4,16 @@ import InputEmail from "../text-field/input_email";
 import InputPassword from "../text-field/input_password";
 import PaginationDot from "../pagination-dot/pagination-dot";
 import NormalFillButton from "../button/normal-fill-button";
+import { signup } from "@/app/auth/actions";
 
-const ModalSignUp = (props: {
-  closeModalSignUp: Dispatch<SetStateAction<boolean>>;
-}) => {
+const ModalSignUp = (props: { closeModalSignUp: Function }) => {
   const { closeModalSignUp: closeModalSignUp } = props;
   const inputPage = "InputPage";
   const sendMailPage = "SendMailPage";
   const [page, setPage] = useState(inputPage);
 
-  const SignUp = () => {
-    // TODO: Sign Up処理を実装
+  const SignUpButtonFunction = (formData: FormData) => {
+    signup(formData);
     setPage("SendMailPage");
   };
 
@@ -22,7 +21,7 @@ const ModalSignUp = (props: {
   let InputFormComponent;
   switch (page) {
     case inputPage:
-      InputFormComponent = InputPage(SignUp);
+      InputFormComponent = InputPage(SignUpButtonFunction);
       break;
     case sendMailPage:
       InputFormComponent = SendMailPage();
@@ -59,37 +58,41 @@ const ModalSignUp = (props: {
       </div>
       {/* 入力フォーム部分 */}
       {InputFormComponent}
-    </ModalCardLayout>
-  );
-};
-
-const InputPage = (
-  signUpFunction: React.MouseEventHandler<HTMLButtonElement>
-) => {
-  return (
-    <div className='p-4 md:p-5'>
-      {/* TODO: Sign Upフォームの作成 */}
-      <p>Todo: Create Sing Up form</p>
-      <div className='mt-4'>
-        <InputEmail required={true} />
-      </div>
-      <div className='mt-4'>
-        <InputPassword required={true} />
-      </div>
-      <div className='flex justify-center mt-6 py-2 px-1'>
-        <button
-          onClick={signUpFunction}
-          className='w-full'
-        >
-          <NormalFillButton>Sign Up</NormalFillButton>
-        </button>
-      </div>
-      <div className='flex items-center justify-center mt-5'>
+      <div className='flex items-center justify-center pb-3'>
         <PaginationDot isActiveColor={true} />
         <PaginationDot isActiveColor={false} />
         <PaginationDot isActiveColor={false} />
         <PaginationDot isActiveColor={false} />
       </div>
+    </ModalCardLayout>
+  );
+};
+
+// TODO: React.MouseEventHandler<HTMLButtonElement>について調べる
+// React.MouseEventHandler<HTMLButtonElement>
+const InputPage = (signUpFunction: Function) => {
+  return (
+    <div className='p-4 md:p-5'>
+      {/* TODO: Sign Upフォームの作成 */}
+      <p>Todo: Create Sing Up form</p>
+      <form>
+        <div className='mt-4'>
+          <InputEmail required={true} />
+        </div>
+        <div className='mt-4'>
+          <InputPassword required={true} />
+        </div>
+        <div className='flex justify-center mt-6 py-2 px-1'>
+          <button
+            formAction={(formData) => {
+              signUpFunction(formData);
+            }}
+            className='w-full'
+          >
+            <NormalFillButton>Sign Up</NormalFillButton>
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

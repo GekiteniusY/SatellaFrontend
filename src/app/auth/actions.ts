@@ -21,6 +21,7 @@ export async function login(formData: FormData) {
   console.log("login form data: ", data);
 
   const { error } = await supabase.auth.signInWithPassword(data);
+  console.log("login error:", error);
 
   if (error) {
     redirect("/error");
@@ -41,8 +42,10 @@ export async function signup(formData: FormData) {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   };
+  console.log("signup form data: ", data);
 
   const { error } = await supabase.auth.signUp(data);
+  console.log("signup error: ", error);
 
   if (error) {
     redirect("/error");
@@ -57,6 +60,7 @@ export async function logout() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { error } = await supabase.auth.signOut();
+  console.log("logout error: ", error);
 
   if (error) {
     redirect("/error");
