@@ -44,10 +44,15 @@ export async function signup(formData: FormData) {
   };
   console.log("signup form data: ", data);
 
-  const { error } = await supabase.auth.signUp(data);
-  console.log("signup error: ", error);
+  // const { error } = await supabase.auth.signUp(data);
 
-  if (error) {
+  // TODO: すでにユーザーが存在する場合の処理について適切な扱いを調査する
+  // issue https://github.com/supabase/supabase-js/issues/296
+
+  const signUpResponse = await supabase.auth.signUp(data);
+  console.log("signup response: ", signUpResponse);
+
+  if (signUpResponse.error) {
     redirect("/error");
   }
 
