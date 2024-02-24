@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavigationSupabaseListener from "../repository/navigation-supabase-listener";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Satella",
@@ -16,6 +17,20 @@ export default function RootLayout({
 
   return (
     <html lang='ja'>
+      <Head>
+        <link
+          rel='preconnect'
+          href='https://fonts.googleapis.com'
+        ></link>
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+        ></link>
+        <link
+          href='https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap'
+          rel='stylesheet'
+        ></link>
+      </Head>
       <body>
         <div>
           <NavigationSupabaseListener />
