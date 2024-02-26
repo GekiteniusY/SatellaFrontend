@@ -7,6 +7,7 @@ import ModalSignUp from "../modal/modal-signup";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import IconUserProfile from "../../icons/user-profile";
 
 // TODO: CSSのデザインを修正
 // TODO: Userのプロフィールページへリンクするアイコン部分の作成
@@ -106,7 +107,9 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
             })}
             {session ? (
               // サインイン中は特段の表示なし
-              <></>
+              <>
+                <IconUserProfile />
+              </>
             ) : (
               // サインイン前にはSignInとSignUpのモーダルへのリンクを表示
               <>

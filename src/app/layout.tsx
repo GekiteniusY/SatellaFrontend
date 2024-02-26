@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavigationSupabaseListener from "../repository/navigation-supabase-listener";
 import Head from "next/head";
+// import { biz_udGothic400, biz_udGothic700 } from "../../utils/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Satella",
@@ -16,21 +17,11 @@ export default function RootLayout({
   console.log("RootLayout");
 
   return (
-    <html lang='ja'>
-      <Head>
-        <link
-          rel='preconnect'
-          href='https://fonts.googleapis.com'
-        ></link>
-        <link
-          rel='preconnect'
-          href='https://fonts.gstatic.com'
-        ></link>
-        <link
-          href='https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap'
-          rel='stylesheet'
-        ></link>
-      </Head>
+    <html
+      lang='ja'
+      // className={`${biz_udGothic400.className}`}
+    >
+      <Head children={undefined}></Head>
       <body>
         <div>
           <NavigationSupabaseListener />
