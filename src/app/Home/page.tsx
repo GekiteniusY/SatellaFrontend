@@ -1,4 +1,5 @@
 import { logout } from "../auth/actions";
+import { biz_udGothic400, biz_udGothic700 } from "../../../utils/fonts/fonts";
 
 export default function Home() {
   return (
@@ -14,8 +15,9 @@ export default function Home() {
         <p className='text-2xl'>Bookmark</p>
       </div>
       <div>User Profile Icon</div>
-      <div className='font-bizUd'>User Profile Icon</div>
-      <div className='font-bizUdB'>User Profile Icon</div>
+      <div className={`${biz_udGothic700.className}`}>
+        User Profile Icon biz_udGothic700
+      </div>
       <br />
       <form>
         <button formAction={logout}>Logout</button>

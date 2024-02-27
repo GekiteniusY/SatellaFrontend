@@ -6,10 +6,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        bizUd: ["BIZ UDGothic"],
-        bizUdB: ["BIZ UDGothic wght@700"],
-      },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
         "fade-out": "fadeOut 0.5s ease-in-out",
