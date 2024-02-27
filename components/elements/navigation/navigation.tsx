@@ -90,9 +90,8 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
       {/* 各ページへのリンク */}
       <TopNavigationLayout>
         <>
-          {/* スマホ向け、PC向けの判定はコンポーネント内のTailwindCSSで実装中 */}
-          {/* ∵モーダルの開閉状態の制御ロジックが分散するのを防ぐため */}
-          <nav className='md:flex hidden space-x-10'>
+          {/* デフォルトでhidden md以上の画面では表示する　子要素のX軸間隔は10 */}
+          <nav className='hidden md:flex space-x-10'>
             {navigationLinks.map((obj) => {
               return (
                 <Link
@@ -107,9 +106,9 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
             })}
             {session ? (
               // サインイン中は特段の表示なし
-              <>
+              <div className=''>
                 <IconUserProfile />
-              </>
+              </div>
             ) : (
               // サインイン前にはSignInとSignUpのモーダルへのリンクを表示
               <>

@@ -8,11 +8,11 @@ interface TopNavigationProps {
 
 const TopNavigationLayout: React.FC<TopNavigationProps> = ({ children }) => {
   return (
+    // TODO: CSSのレイアウトを見直して理解できるようにする
     <header>
-      <div className='flex items-center px-4 py-2 bg-gray-300 shadow-md'>
-        <nav className='md:flex hidden space-x-10 bg-blue-300'>
-          <div className='justify-between bg-red-300'>{children}</div>
-        </nav>
+      {/* 子要素を中央に配置　x軸padding4 y軸pading2 shadowをmdレベルで追加 */}
+      <div className='items-center px-4 py-2 bg-gray-700 shadow-md'>
+        <nav className='flex bg-blue-300'>{children}</nav>
       </div>
     </header>
   );
