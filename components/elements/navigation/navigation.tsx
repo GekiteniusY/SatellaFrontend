@@ -89,9 +89,10 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
     <>
       {/* 各ページへのリンク */}
       <TopNavigationLayout>
-        <>
-          {/* デフォルトでhidden md以上の画面では表示する　子要素のX軸間隔は10 */}
-          <nav className='hidden md:flex space-x-10'>
+        {/* デフォルトでhidden md以上の画面ではflexで表示 */}
+        <div className='hidden md:flex justify-between items-center'>
+          {/* 各リンクの間隔をX軸に対して設定 */}
+          <div className='space-x-10'>
             {navigationLinks.map((obj) => {
               return (
                 <Link
@@ -104,11 +105,19 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
                 </Link>
               );
             })}
+          </div>
+          <div>
             {session ? (
-              // サインイン中は特段の表示なし
-              <div className=''>
-                <IconUserProfile />
-              </div>
+              // サインイン中はユーザープロフィールのアイコンを表示
+              <Link
+                key='user icon'
+                href='/Profile'
+                className='text-gray-600'
+              >
+                <div className='flex items-center bg-gray-700'>
+                  <IconUserProfile />
+                </div>
+              </Link>
             ) : (
               // サインイン前にはSignInとSignUpのモーダルへのリンクを表示
               <>
@@ -122,8 +131,8 @@ const TopNavigation: React.FC<NavigationProps> = ({ session }) => {
                 ) : null}
               </>
             )}
-          </nav>
-        </>
+          </div>
+        </div>
       </TopNavigationLayout>
     </>
   );
