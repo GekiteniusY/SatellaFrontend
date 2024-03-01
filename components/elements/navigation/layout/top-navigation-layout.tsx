@@ -12,7 +12,7 @@ const TopNavigationLayout: React.FC<TopNavigationProps> = ({ children }) => {
     <header>
       {/* 子要素を中央に配置　x軸padding4 y軸pading2 shadowをmdレベルで追加 */}
       <div className='items-center px-4 py-2 bg-gray-700 shadow-md'>
-        <nav className='flex bg-blue-300'>{children}</nav>
+        <nav className='bg-blue-300'>{children}</nav>
       </div>
     </header>
   );

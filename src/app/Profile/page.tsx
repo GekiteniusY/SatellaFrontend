@@ -4,7 +4,7 @@ import { createClient } from "../../../utils/supabase/server";
 
 // import { createClient } from "@/utils/supabase/server";
 
-export default async function PrivatePage() {
+export default async function ProfilePage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
